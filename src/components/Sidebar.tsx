@@ -23,6 +23,7 @@ const menu = [
   { name: "Unit Sales", icon: <IconBuildingCommunity size={20} /> },
   { name: "Residents", icon: <IconUsers size={20} /> },
   { name: "Panic Alerts", icon: <IconBellRinging size={20} /> },
+  { name: "Complaints", icon: <IconBellRinging size={20} /> },
   { name: "Settings", icon: <IconSettings size={20} /> },
 ];
 

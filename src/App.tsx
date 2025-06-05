@@ -5,6 +5,7 @@ import WaterUsagePage from "./pages/WaterUsagePage";
 import EnergyUsagePage from "./pages/EnergyUsagePage";
 import SalesPage from "./pages/SalesPage";
 import PanicAlertsPage from "./pages/PanicAlertsPage";
+import ComplaintsPage from "./pages/ComplaintsPage";
 import LoginPage from "./pages/LoginPage";
 
 const App: React.FC = () => {
@@ -30,6 +31,7 @@ const App: React.FC = () => {
         {page === "Energy Usage" && <EnergyUsagePage />}
         {page === "Sales" && <SalesPage />}
         {page === "Panic Alerts" && <PanicAlertsPage />}
+        {page === "Complaints" && <ComplaintsPage />}
         {page === "Settings" && <div>Settings Page</div>}
       </main>
     </div>
