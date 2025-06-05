@@ -60,7 +60,7 @@ const PanicAlerts: React.FC = () => {
           </select>
         </div>
       </div>
-      <div className="bg-white rounded shadow mb-6 flex justify-center w-full">
+      <div className="bg-white rounded shadow p-4 mb-6 flex justify-center w-full">
         <MapContainer
           center={mapMarkers[selectedComplex][0] ? [mapMarkers[selectedComplex][0].lat, mapMarkers[selectedComplex][0].lng] : [-6.2, 106.8]}
           zoom={16}

@@ -8,6 +8,7 @@ import PanicAlertsPage from "./pages/PanicAlertsPage";
 import ComplaintsPage from "./pages/ComplaintsPage";
 import OccupancyPage from "./pages/Occupancy";
 import LoginPage from "./pages/LoginPage";
+import ResidentsPage from "./pages/ResidentsPage";
 
 const App: React.FC = () => {
   const [page, setPage] = useState("Dashboard");
@@ -32,6 +33,7 @@ const App: React.FC = () => {
         {page === "Energy Usage" && <EnergyUsagePage />}
         {page === "Sales" && <SalesPage />}
         {page === "Occupancy" && <OccupancyPage />}
+        {page === "Residents" && <ResidentsPage />}
         {page === "Panic Alerts" && <PanicAlertsPage />}
         {page === "Complaints" && <ComplaintsPage />}
         {page === "Settings" && <div>Settings Page</div>}

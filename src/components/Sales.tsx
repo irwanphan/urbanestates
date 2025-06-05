@@ -60,15 +60,15 @@ const Sales: React.FC = () => {
 
       {/* Quick Stat */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-blue-100 rounded p-4 text-center">
+        <div className="bg-white shadow rounded p-4 text-center">
           <div className="font-semibold text-blue-800">Total Unit</div>
           <div className="text-2xl font-bold">{complex.totalUnit}</div>
         </div>
-        <div className="bg-blue-100 rounded p-4 text-center">
+        <div className="bg-white shadow rounded p-4 text-center">
           <div className="font-semibold text-blue-800">Total Sales</div>
           <div className="text-2xl font-bold">{Math.round(complex.totalSales * 100)}%</div>
         </div>
-        <div className="bg-blue-100 rounded p-4 text-center">
+        <div className="bg-white shadow rounded p-4 text-center">
           <div className="font-semibold text-blue-800">Total Revenue</div>
           <div className="text-2xl font-bold">{formatRupiah(complex.totalRevenue)}</div>
         </div>
