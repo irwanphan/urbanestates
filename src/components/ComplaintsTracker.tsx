@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
 // Dummy data kompleks
 const complexes = [
@@ -28,6 +31,20 @@ const ComplaintsTracker: React.FC = () => {
   const [selectedComplex, setSelectedComplex] = useState<ComplexName>("Boston Village");
   const data = complaintsData[selectedComplex];
 
+  const mapMarkers = {
+    "Boston Village": [
+      { lat: -6.2001, lng: 106.8167, label: "Apt 203", status: "Pending" },
+      { lat: -6.2002, lng: 106.8168, label: "Apt 101", status: "Resolved" },
+      { lat: -6.2003, lng: 106.8169, label: "Apt 302", status: "Pending" },
+      { lat: -6.2004, lng: 106.8170, label: "Apt 102", status: "Resolved" },
+      { lat: -6.2005, lng: 106.8171, label: "Apt 201", status: "Pending" },
+    ],
+    "Green Park": [
+      { lat: -6.2101, lng: 106.8267, label: "Apt 11", status: "Pending" },
+      { lat: -6.2102, lng: 106.8268, label: "Apt 22", status: "Resolved" },
+    ],
+  };
+
   return (
     <div>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
@@ -47,12 +64,41 @@ const ComplaintsTracker: React.FC = () => {
       </div>
 
       {/* Dummy Map */}
-      <div className="bg-white rounded shadow mb-6 flex justify-center">
-        <img
-          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-          alt="Map"
-          className="rounded w-full max-w-2xl h-80 object-cover"
-        />
+      <div className="bg-white rounded shadow mb-6 flex justify-center w-full">
+        <MapContainer
+          center={mapMarkers[selectedComplex][0] ? [mapMarkers[selectedComplex][0].lat, mapMarkers[selectedComplex][0].lng] : [-6.2, 106.8]}
+          zoom={16}
+          style={{ height: "320px", width: "100%", maxWidth: "100%", margin: "0 auto" }}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="&copy; OpenStreetMap contributors"
+          />
+          {mapMarkers[selectedComplex].map((marker, idx) => (
+            <Marker
+              key={idx}
+              position={[marker.lat, marker.lng]}
+              icon={new L.Icon({
+                iconUrl: marker.status === "Pending"
+                  ? "https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/images/marker-icon-red.png"
+                  : "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png",
+                shadowSize: [41, 41],
+              })}
+            >
+              <Popup>
+                <div>
+                  <div className="font-bold">{marker.label}</div>
+                  <div>Status: <span className={marker.status === "Pending" ? "text-orange-500" : "text-gray-500"}>{marker.status}</span></div>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
       </div>
 
       {/* Table */}
