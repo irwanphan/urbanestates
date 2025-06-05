@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import DashboardPage from "./pages/DashboardPage";
 import WaterUsagePage from "./pages/WaterUsagePage";
@@ -9,14 +9,17 @@ import LoginPage from "./pages/LoginPage";
 
 const App: React.FC = () => {
   const [page, setPage] = useState("Dashboard");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
 
-  if (!loggedIn) {
-    return <LoginPage onLoginSuccess={() => {
-      console.log("onLoginSuccess dipanggil");
-      setLoggedIn(true);
-    }} />;
-  }
+  useEffect(() => {
+    fetch('/api/me', { credentials: 'include' })
+      .then(res => res.json())
+      .then(data => setLoggedIn(data.loggedIn))
+      .catch(() => setLoggedIn(false));
+  }, []);
+
+  if (loggedIn === null) return <div>Loading...</div>;
+  if (!loggedIn) return <LoginPage onLoginSuccess={() => setLoggedIn(true)} />;
 
   return (
     <div className="flex">

@@ -1,5 +1,6 @@
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
@@ -27,6 +28,14 @@ export default async function handler(req: any, res: any) {
 
     const user = rows[0];
     if (user && bcrypt.compareSync(password, user.password_hash)) {
+      // Buat JWT
+      const token = jwt.sign(
+        { email: user.email, id: user.id },
+        process.env.JWT_SECRET!,
+        { expiresIn: '7d' }
+      );
+      // Set cookie (httpOnly, secure)
+      res.setHeader('Set-Cookie', `token=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=604800; Secure`);
       return res.status(200).json({ success: true, user: { email: user.email } });
     } else {
       return res.status(401).json({ success: false, message: 'Email atau password salah.' });
