@@ -11,17 +11,29 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (data.success) {
-      setError("");
-      onLoginSuccess();
-    } else {
-      setError("Email atau password salah.");
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      // Cek status dan content-type
+      const text = await res.text();
+      let result;
+      try {
+        result = JSON.parse(text);
+      } catch {
+        setError("Server error: response is not valid JSON.");
+        return;
+      }
+      if (result.success) {
+        setError("");
+        onLoginSuccess();
+      } else {
+        setError(result.message || "Email atau password salah.");
+      }
+    } catch (err) {
+      setError("Network error: " + err);
     }
   };
 

@@ -27,7 +27,7 @@ const menu = [
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ selected, onSelect }) => (
-  <aside className="bg-blue-600 text-white w-56 min-h-screen p-4">
+  <aside className="fixed top-0 left-0 h-screen w-56 bg-blue-600 text-white p-4 z-20">
     <h2 className="font-bold text-lg mb-1">Urban Estates</h2>
     <div className="text-xs text-blue-200 mb-8">Property Management</div>
     <ul>

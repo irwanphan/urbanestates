@@ -12,13 +12,16 @@ const App: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   if (!loggedIn) {
-    return <LoginPage onLoginSuccess={() => setLoggedIn(true)} />;
+    return <LoginPage onLoginSuccess={() => {
+      console.log("onLoginSuccess dipanggil");
+      setLoggedIn(true);
+    }} />;
   }
 
   return (
     <div className="flex">
       <Sidebar selected={page} onSelect={setPage} />
-      <main className="flex-1 p-8 bg-gray-50 min-h-screen">
+      <main className="flex-1 p-8 bg-gray-50 min-h-screen ml-56">
         {page === "Dashboard" && <DashboardPage />}
         {page === "Water Usage" && <WaterUsagePage />}
         {page === "Energy Usage" && <EnergyUsagePage />}
