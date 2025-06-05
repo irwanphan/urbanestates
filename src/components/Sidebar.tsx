@@ -8,6 +8,7 @@ import {
   IconUsers,
   IconBellRinging,
   IconSettings,
+  IconLogout,
 } from "@tabler/icons-react";
 
 type SidebarProps = {
@@ -42,6 +43,10 @@ const Sidebar: React.FC<SidebarProps> = ({ selected, onSelect }) => (
           <span>{item.name}</span>
         </li>
       ))}
+      <li className="flex absolute bottom-4 w-48 items-center gap-3 py-2 px-3 rounded-full cursor-pointer transition mt-auto hover:bg-blue-700">
+        <IconLogout size={20} />
+        <span>Logout</span>
+      </li>
     </ul>
   </aside>
 );

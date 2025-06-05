@@ -33,9 +33,27 @@ function FlyToLocation({ position }: { position: [number, number] }) {
   return null;
 }
 
+const ResidentDetailModal: React.FC<{ resident: ResidentRow; onClose: () => void }> = ({ resident, onClose }) => (
+  <div className="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-8888">
+    <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+      <h2 className="text-xl font-bold mb-4">{resident.name}</h2>
+      <div className="mb-2"><b>Unit:</b> {resident.unit}</div>
+      <div className="mb-2"><b>Address:</b> {resident.address}</div>
+      <button
+        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        onClick={onClose}
+      >
+        Close
+      </button>
+    </div>
+  </div>
+);
+
 const Residents: React.FC = () => {
   const [selectedComplex, setSelectedComplex] = useState<ComplexName>("Boston Village");
   const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null);
+  const [modalResident, setModalResident] = useState<ResidentRow | null>(null);
+  const [openPopupIdx, setOpenPopupIdx] = useState<number | null>(null);
   const data = residentsData[selectedComplex];
 
   // Center map to first resident or default
@@ -61,7 +79,7 @@ const Residents: React.FC = () => {
           </select>
         </div>
       </div>
-      <div className="bg-white rounded shadow mb-6 flex justify-center w-full">
+      <div className="bg-white rounded shadow mb-6 p-4 flex justify-center w-full">
         <MapContainer
           center={selectedPosition || defaultCenter}
           zoom={16}
@@ -85,14 +103,32 @@ const Residents: React.FC = () => {
                 shadowUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png",
                 shadowSize: [41, 41],
               })}
+              eventHandlers={{
+                click: () => setOpenPopupIdx(idx),
+              }}
             >
-              <Popup>
-                <div>
-                  <div className="font-bold">{resident.name}</div>
-                  <div>Unit: {resident.unit}</div>
-                  <div>Address: {resident.address}</div>
-                </div>
-              </Popup>
+              {openPopupIdx === idx && (
+                <Popup
+                  eventHandlers={{
+                    remove: () => setOpenPopupIdx(null),
+                  }}
+                >
+                  <div>
+                    <div className="font-bold">{resident.name}</div>
+                    <div>Unit: {resident.unit}</div>
+                    <div>Address: {resident.address}</div>
+                    <button
+                      className="mt-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700"
+                      onClick={() => {
+                        setOpenPopupIdx(null);
+                        setModalResident(resident);
+                      }}
+                    >
+                      View Detail
+                    </button>
+                  </div>
+                </Popup>
+              )}
             </Marker>
           ))}
         </MapContainer>
@@ -121,6 +157,12 @@ const Residents: React.FC = () => {
           </tbody>
         </table>
       </div>
+      {modalResident && (
+        <ResidentDetailModal
+          resident={modalResident}
+          onClose={() => setModalResident(null)}
+        />
+      )}
     </div>
   );
 };
