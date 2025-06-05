@@ -4,6 +4,14 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
+type House = {
+  id: number;
+  name: string;
+  unit: string;
+  status: string;
+  position: [number, number];
+};
+
 const data = [
   { name: "Jan", value: 120 },
   { name: "Feb", value: 132 },
@@ -14,7 +22,7 @@ const data = [
   { name: "Jul", value: 210 },
 ];
 
-const houses = [
+const houses: House[] = [
   {
     id: 1,
     name: "Alex Johnson",

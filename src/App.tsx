@@ -5,9 +5,15 @@ import WaterUsagePage from "./pages/WaterUsagePage";
 import EnergyUsagePage from "./pages/EnergyUsagePage";
 import SalesPage from "./pages/SalesPage";
 import PanicAlertsPage from "./pages/PanicAlertsPage";
+import LoginPage from "./pages/LoginPage";
 
 const App: React.FC = () => {
   const [page, setPage] = useState("Dashboard");
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  if (!loggedIn) {
+    return <LoginPage onLoginSuccess={() => setLoggedIn(true)} />;
+  }
 
   return (
     <div className="flex">
