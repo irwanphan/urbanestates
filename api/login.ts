@@ -20,14 +20,19 @@ export default async function handler(req: any, res: any) {
     connectionLimit: 1,
   });
 
-  // Query user
-  const [rows]: any = await pool.query('SELECT * FROM users WHERE email = ? LIMIT 1', [email]);
-  await pool.end();
+  try {
+    // Query user
+    const [rows]: any = await pool.query('SELECT * FROM users WHERE email = ? LIMIT 1', [email]);
+    await pool.end();
 
-  const user = rows[0];
-  if (user && bcrypt.compareSync(password, user.password_hash)) {
-    return res.status(200).json({ success: true, user: { email: user.email } });
-  } else {
-    return res.status(401).json({ success: false, message: 'Email atau password salah.' });
+    const user = rows[0];
+    if (user && bcrypt.compareSync(password, user.password_hash)) {
+      return res.status(200).json({ success: true, user: { email: user.email } });
+    } else {
+      return res.status(401).json({ success: false, message: 'Email atau password salah.' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: err.message });
   }
 }
