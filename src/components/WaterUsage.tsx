@@ -49,7 +49,7 @@ const WaterUsage: React.FC = () => (
         </thead>
         <tbody>
           {usageDetails.map((row, idx) => (
-            <tr key={idx} className="border-t">
+            <tr key={idx} className="border-t border-gray-200">
               <td className="py-2 px-4">{row.date}</td>
               <td className="py-2 px-4">{row.summary}</td>
               <td className="py-2 px-4">{row.usage}</td>

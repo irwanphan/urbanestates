@@ -115,7 +115,7 @@ const ComplaintsTracker: React.FC = () => {
           </thead>
           <tbody>
             {data.map((row: ComplaintRow, idx: number) => (
-              <tr key={idx} className="border-t">
+              <tr key={idx} className="border-t border-gray-200">
                 <td className="py-2 px-4">{row.resident}</td>
                 <td className="py-2 px-4 text-blue-700 font-semibold">{row.unit}</td>
                 <td className="py-2 px-4">{row.time}</td>

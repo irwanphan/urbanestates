@@ -24,7 +24,7 @@ const Occupancy: React.FC = () => {
             {complexes.map((c, idx) => {
               const percent = c.total > 0 ? Math.round((c.occupied / c.total) * 100) : 0;
               return (
-                <tr key={idx} className="border-t">
+                <tr key={idx} className="border-t border-gray-200">
                   <td className="py-2 px-4 font-semibold">{c.name}</td>
                   <td className="py-2 px-4">{c.occupied}</td>
                   <td className="py-2 px-4">{c.total}</td>

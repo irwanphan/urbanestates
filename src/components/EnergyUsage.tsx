@@ -48,7 +48,7 @@ const EnergyUsage: React.FC = () => (
         </thead>
         <tbody>
           {paymentDetails.map((row, idx) => (
-            <tr key={idx} className="border-t">
+            <tr key={idx} className="border-t border-gray-200">
               <td className="py-2 px-4">{row.payer}</td>
               <td className="py-2 px-4">Rp {row.amount.toLocaleString()}</td>
               <td className="py-2 px-4">{row.status}</td>

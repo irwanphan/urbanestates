@@ -146,7 +146,7 @@ const Residents: React.FC = () => {
             {data.map((row: ResidentRow, idx: number) => (
               <tr
                 key={idx}
-                className="border-t cursor-pointer hover:bg-blue-50"
+                className="border-t border-gray-200 cursor-pointer hover:bg-blue-50"
                 onClick={() => setSelectedPosition([row.lat, row.lng])}
               >
                 <td className="py-2 px-4 font-semibold text-blue-700">{row.name}</td>
