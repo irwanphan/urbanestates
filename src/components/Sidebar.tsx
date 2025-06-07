@@ -14,6 +14,7 @@ import {
 type SidebarProps = {
   selected: string;
   onSelect: (page: string) => void;
+  onLogout: () => void;
 };
 
 const menu = [
@@ -28,7 +29,7 @@ const menu = [
   { name: "Settings", icon: <IconSettings size={20} /> },
 ];
 
-const Sidebar: React.FC<SidebarProps> = ({ selected, onSelect }) => (
+const Sidebar: React.FC<SidebarProps> = ({ selected, onSelect, onLogout }) => (
   <aside className="fixed top-0 left-0 h-screen w-56 bg-blue-600 text-white p-4 z-20">
     <h2 className="font-bold text-lg mb-1">Urban Estates</h2>
     <div className="text-xs text-blue-200 mb-8">Property Management</div>
@@ -43,7 +44,10 @@ const Sidebar: React.FC<SidebarProps> = ({ selected, onSelect }) => (
           <span>{item.name}</span>
         </li>
       ))}
-      <li className="flex absolute bottom-4 w-48 items-center gap-3 py-2 px-3 rounded-full cursor-pointer transition mt-auto hover:bg-blue-700">
+      <li className="flex absolute bottom-4 w-48 items-center gap-3 py-2
+        px-3 rounded-full cursor-pointer transition mt-auto hover:bg-blue-700"
+        onClick={() => onLogout()}
+        >
         <IconLogout size={20} />
         <span>Logout</span>
       </li>

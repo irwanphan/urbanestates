@@ -22,12 +22,17 @@ const App: React.FC = () => {
       .catch(() => setLoggedIn(false));
   }, []);
 
+  const handleLogout = async () => {
+    await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+    setLoggedIn(false);
+  };
+
   if (loggedIn === null) return <div>Loading...</div>;
   if (!loggedIn) return <LoginPage onLoginSuccess={() => setLoggedIn(true)} />;
 
   return (
     <div className="flex">
-      <Sidebar selected={page} onSelect={setPage} />
+      <Sidebar selected={page} onSelect={setPage} onLogout={handleLogout} />
       <main className="flex-1 p-8 bg-gray-50 min-h-screen ml-56">
         {page === "Dashboard" && <DashboardPage />}
         {page === "Water Usage" && <WaterUsagePage />}
