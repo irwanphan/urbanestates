@@ -76,23 +76,23 @@ const Sales: React.FC = () => {
 
       {/* Quick Stat */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white rounded p-4 text-center">
-          <div className="font-semibold text-blue-800">Total Unit</div>
+        <div className="bg-white rounded p-4">
+          <div className="font-semibold text-blue-700">Total Unit</div>
           <div className="text-2xl font-bold">{complex.totalUnit}</div>
         </div>
-        <div className="bg-white rounded p-4 text-center">
-          <div className="font-semibold text-blue-800">Total Sales</div>
+        <div className="bg-white rounded p-4">
+          <div className="font-semibold text-blue-700">Total Sales</div>
           <div className="text-2xl font-bold">{Math.round(complex.totalSales * 100)}%</div>
         </div>
-        <div className="bg-white rounded p-4 text-center">
-          <div className="font-semibold text-blue-800">Total Revenue</div>
+        <div className="bg-white rounded p-4">
+          <div className="font-semibold text-blue-700">Total Revenue</div>
           <div className="text-2xl font-bold">{formatRupiah(complex.totalRevenue)}</div>
         </div>
       </div>
 
       {/* Tabs & Search */}
       <div className="mb-4 flex flex-col gap-2">
-        <div className="flex gap-6 border-b">
+        <div className="flex gap-6 border-b border-gray-200">
           {statusTabs.map(tab => (
             <button
               key={tab}

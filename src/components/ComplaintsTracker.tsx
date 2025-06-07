@@ -52,7 +52,7 @@ const ComplaintsTracker: React.FC = () => {
         <div className="flex items-center gap-2">
           <span className="font-semibold">Resident Complex Name:</span>
           <select
-            className="border rounded px-3 py-1"
+            className="border rounded px-3 py-1 bg-white"
             value={selectedComplex}
             onChange={e => setSelectedComplex(e.target.value as ComplexName)}
           >

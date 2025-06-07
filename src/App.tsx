@@ -9,6 +9,7 @@ import ComplaintsPage from "./pages/ComplaintsPage";
 import OccupancyPage from "./pages/Occupancy";
 import LoginPage from "./pages/LoginPage";
 import ResidentsPage from "./pages/ResidentsPage";
+import SettingsPage from "./pages/SettingsPage";
 
 const App: React.FC = () => {
   const [page, setPage] = useState("Dashboard");
@@ -36,7 +37,7 @@ const App: React.FC = () => {
         {page === "Residents" && <ResidentsPage />}
         {page === "Panic Alerts" && <PanicAlertsPage />}
         {page === "Complaints" && <ComplaintsPage />}
-        {page === "Settings" && <div>Settings Page</div>}
+        {page === "Settings" && <SettingsPage />}
       </main>
     </div>
   );
